@@ -1,0 +1,25 @@
+{
+  "name": "mutsuki",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "type-check": "vue-tsc --noEmit",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "simplex-noise": "^4.0.3",
+    "three": "^0.185.1",
+    "vue": "^3.5.40",
+    "vue-i18n": "^11.4.10"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "typescript": "^5.9.2",
+    "vite": "^8.2.0",
+    "vue-tsc": "^3.0.6"
+  }
+}
