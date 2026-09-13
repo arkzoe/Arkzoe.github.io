@@ -17,8 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useInViewOnce } from '../composables/useInViewOnce'
 
 const props = withDefaults(
   defineProps<{
@@ -84,27 +85,7 @@ const { locale } = useI18n()
 const tokens = computed(() => tokenize(props.text, String(locale.value)))
 
 const rootRef = ref<HTMLElement | null>(null)
-const inView = ref(false)
-let observer: IntersectionObserver | null = null
-
-onMounted(() => {
-  const root = rootRef.value
-  if (!root) return
-
-  observer = new IntersectionObserver(
-    (entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return
-      inView.value = true
-      observer?.disconnect()
-    },
-    { threshold: 0.35, rootMargin: '0px 0px -8% 0px' },
-  )
-  observer.observe(root)
-})
-
-onBeforeUnmount(() => {
-  observer?.disconnect()
-})
+const inView = useInViewOnce(rootRef)
 </script>
 
 <style scoped>

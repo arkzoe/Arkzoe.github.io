@@ -1,5 +1,10 @@
 <template>
-  <article class="interest-card" :class="`interest-card--${tone}`">
+  <Reveal
+    as="article"
+    class="interest-card"
+    :class="`interest-card--${tone}`"
+    :delay-ms="delayMs"
+  >
     <p class="card-index">{{ t(`cards.${id}.index`) }}</p>
     <h3>
       <WordReveal
@@ -8,12 +13,19 @@
         :delay-ms="delayMs"
       />
     </h3>
-    <p>{{ t(`cards.${id}.text`) }}</p>
-  </article>
+    <p>
+      <WordReveal
+        :key="`${locale}-card-${id}-text`"
+        :text="t(`cards.${id}.text`)"
+        :delay-ms="delayMs + 160"
+      />
+    </p>
+  </Reveal>
 </template>
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import Reveal from './Reveal.vue'
 import WordReveal from './WordReveal.vue'
 
 withDefaults(

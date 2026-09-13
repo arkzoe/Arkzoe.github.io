@@ -4,7 +4,9 @@
     <h2 id="connect-title">
       <WordReveal :key="`${locale}-connect-title`" :text="t('connect.title')" />
     </h2>
-    <p class="connect-sub">{{ t('connect.subtitle') }}</p>
+    <Reveal as="p" class="connect-sub" :key="`${locale}-connect-sub`" :delay-ms="120">
+      {{ t('connect.subtitle') }}
+    </Reveal>
     <a
       class="github-link"
       href="https://github.com/arkzoe"
@@ -22,6 +24,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import Reveal from './Reveal.vue'
 import WordReveal from './WordReveal.vue'
 
 const { t, locale } = useI18n()

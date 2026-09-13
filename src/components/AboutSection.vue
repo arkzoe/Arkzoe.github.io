@@ -12,17 +12,29 @@
     </div>
 
     <div class="about-copy">
-      <p v-for="paragraph in aboutParagraphs" :key="paragraph">
+      <Reveal
+        v-for="(paragraph, i) in aboutParagraphs"
+        :key="`${locale}-about-p-${i}`"
+        as="p"
+        :delay-ms="80 + i * 70"
+      >
         {{ paragraph }}
-      </p>
-      <p class="about-last-line">{{ t('about.lastLine') }}</p>
+      </Reveal>
+      <Reveal
+        as="p"
+        class="about-last-line"
+        :key="`${locale}-about-last`"
+        :delay-ms="80 + aboutParagraphs.length * 70"
+      >
+        {{ t('about.lastLine') }}
+      </Reveal>
     </div>
 
     <div id="interests" class="interest-grid" :aria-label="t('cards.label')">
-      <InterestCard id="make" tone="blue" />
-      <InterestCard id="novel" tone="pink" :delay-ms="80" />
-      <InterestCard id="anime" tone="purple" :delay-ms="160" />
-      <InterestCard id="yuri" tone="blue" :delay-ms="240" />
+      <InterestCard :key="`${locale}-card-make`" id="make" tone="blue" />
+      <InterestCard :key="`${locale}-card-novel`" id="novel" tone="pink" :delay-ms="80" />
+      <InterestCard :key="`${locale}-card-anime`" id="anime" tone="purple" :delay-ms="160" />
+      <InterestCard :key="`${locale}-card-yuri`" id="yuri" tone="blue" :delay-ms="240" />
     </div>
   </section>
 </template>
@@ -31,6 +43,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import InterestCard from './InterestCard.vue'
+import Reveal from './Reveal.vue'
 import WordReveal from './WordReveal.vue'
 
 const { t, tm, locale } = useI18n()

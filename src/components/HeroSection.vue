@@ -11,7 +11,12 @@
       </p>
 
       <div class="tag-cloud" :aria-label="t('hero.tagsLabel')">
-        <span v-for="tag in heroTags" :key="tag">{{ tag }}</span>
+        <Reveal
+          v-for="(tag, i) in heroTags"
+          :key="`${locale}-tag-${i}`"
+          as="span"
+          :delay-ms="480 + i * 45"
+        >{{ tag }}</Reveal>
       </div>
 
       <a class="scroll-link" href="#about">{{ t('hero.scroll') }} <span>↓</span></a>
@@ -22,6 +27,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import Reveal from './Reveal.vue'
 import WordReveal from './WordReveal.vue'
 
 const { t, tm, locale } = useI18n()
@@ -72,6 +78,7 @@ const heroTags = computed(() => tm('hero.tags') as string[])
 }
 
 .tag-cloud span {
+  display: inline-block;
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 8px 13px 9px;
