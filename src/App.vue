@@ -31,8 +31,8 @@
         <section class="hero content-width" aria-labelledby="hero-title">
           <div class="hero-copy">
             <p class="eyebrow">{{ t('hero.eyebrow') }}</p>
-            <h1 id="hero-title">{{ t('hero.titleLine1') }}<br />{{ t('hero.titleLine2') }}</h1>
-            <p class="hero-intro">{{ t('hero.intro') }}</p>
+            <h1 id="hero-title"><WordReveal :key="`${locale}-hero-t1`" :text="t('hero.titleLine1')" /><br /><WordReveal :key="`${locale}-hero-t2`" :text="t('hero.titleLine2')" :delay-ms="150" /></h1>
+            <p class="hero-intro"><WordReveal :key="`${locale}-hero-intro`" :text="t('hero.intro')" :delay-ms="320" /></p>
 
             <div class="tag-cloud" :aria-label="t('hero.tagsLabel')">
               <span v-for="tag in heroTags" :key="tag">{{ tag }}</span>
@@ -49,7 +49,7 @@
         >
           <div class="section-heading">
             <p class="eyebrow">{{ t('about.label') }}</p>
-            <h2 id="about-title">{{ t('about.title') }}</h2>
+            <h2 id="about-title"><WordReveal :key="`${locale}-about-title`" :text="t('about.title')" /></h2>
           </div>
 
           <div class="about-copy">
@@ -62,22 +62,22 @@
           <div id="interests" class="interest-grid" :aria-label="t('cards.label')">
             <article class="interest-card interest-card--blue">
               <p class="card-index">{{ t('cards.make.index') }}</p>
-              <h3>{{ t('cards.make.title') }}</h3>
+              <h3><WordReveal :key="`${locale}-card-make`" :text="t('cards.make.title')" /></h3>
               <p>{{ t('cards.make.text') }}</p>
             </article>
             <article class="interest-card interest-card--pink">
               <p class="card-index">{{ t('cards.novel.index') }}</p>
-              <h3>{{ t('cards.novel.title') }}</h3>
+              <h3><WordReveal :key="`${locale}-card-novel`" :text="t('cards.novel.title')" :delay-ms="80" /></h3>
               <p>{{ t('cards.novel.text') }}</p>
             </article>
             <article class="interest-card interest-card--purple">
               <p class="card-index">{{ t('cards.anime.index') }}</p>
-              <h3>{{ t('cards.anime.title') }}</h3>
+              <h3><WordReveal :key="`${locale}-card-anime`" :text="t('cards.anime.title')" :delay-ms="160" /></h3>
               <p>{{ t('cards.anime.text') }}</p>
             </article>
             <article class="interest-card interest-card--blue">
               <p class="card-index">{{ t('cards.yuri.index') }}</p>
-              <h3>{{ t('cards.yuri.title') }}</h3>
+              <h3><WordReveal :key="`${locale}-card-yuri`" :text="t('cards.yuri.title')" :delay-ms="240" /></h3>
               <p>{{ t('cards.yuri.text') }}</p>
             </article>
           </div>
@@ -85,7 +85,7 @@
       </main>
       <footer id="connect" class="connect-section content-width">
         <p class="eyebrow">/ CONNECT</p>
-        <h2 id="connect-title">{{ t('connect.title') }}</h2>
+        <h2 id="connect-title"><WordReveal :key="`${locale}-connect-title`" :text="t('connect.title')" /></h2>
         <p class="connect-sub">{{ t('connect.subtitle') }}</p>
         <a
           class="github-link"
@@ -109,6 +109,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { createNoise3D } from 'simplex-noise'
 import { localeLabels, supportedLocales, type SupportedLocale } from './i18n'
+import WordReveal from './components/WordReveal.vue'
 
 const { t, tm, locale } = useI18n()
 const heroTags = computed(() => tm('hero.tags') as string[])
